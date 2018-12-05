@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:title="Flash"
+        android:id="@+id/menuFlash"
+        android:icon="@drawable/sun"
+        app:showAsAction="always"/>
+
+    <item android:title="QR code Generator"
+        android:orderInCategory="1"
+        android:id="@+id/menuGenerate" />
+
+    <item android:title="QR code Scanner"
+        android:id="@+id/menuScanner"
+        android:orderInCategory="2"/>
+
+    <item android:title="History"
+        android:id="@+id/menuHistory"
+        android:orderInCategory="3"/>
+
+    <item android:title="Setting"
+        android:id="@+id/menuSettings"
+        android:icon="@android:drawable/ic_menu_manage"
+        android:orderInCategory="4"/>
+
+    <item android:title="Like"
+        android:id="@+id/menuLike"
+        android:orderInCategory="5" />
+
+    <item android:title="Share"
+        android:id="@+id/menuShare"
+        android:orderInCategory="6">
+        <menu>
+            <item android:title="Email"
+                android:id="@+id/email"/>
+            <item android:title="Facebook"
+                android:id="@+id/facebook"/>
+        </menu>
+    </item>
+
+    <item android:title="More Aplication"
+        android:id="@+id/menuMoreApp"
+        android:orderInCategory="7"/>
+</menu>

@@ -51,6 +51,7 @@ public class QRcodeGenerator extends AppCompatActivity {
     private ImageView imageView;
     private Button btnSave;
     private Button btnShare;
+    private Button btnReset;
     private AlertDialog dialog;
     View view;
     ByteArrayOutputStream bytearrayoutputstream;
@@ -61,12 +62,14 @@ public class QRcodeGenerator extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.generator_main);
+        setTitle("QR Generator");
 
         etInput = findViewById(R.id.etInput);
         btnCreate = findViewById(R.id.btnCreate);
         imageView = findViewById(R.id.imageView);
         btnSave = findViewById(R.id.btnSave);
         btnShare = findViewById(R.id.btnShare);
+        btnReset = findViewById(R.id.btnReset);
         bytearrayoutputstream = new ByteArrayOutputStream();
 
         checkAndRequestPermissions();
@@ -96,6 +99,7 @@ public class QRcodeGenerator extends AppCompatActivity {
                     bitmap.compress(Bitmap.CompressFormat.PNG, 100, bytearrayoutputstream);
                     Random generator = new Random();
                     int n = 10000;
+                    String path;
                     n = generator.nextInt(n);
                     String name = "Image-" + n + ".png";
                     file = new File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM) + "/" + name);
@@ -108,10 +112,8 @@ public class QRcodeGenerator extends AppCompatActivity {
                     } catch (Exception e) {
                         e.printStackTrace();
                     }
-                    Toast.makeText(QRcodeGenerator.this, "Saved successfully", Toast.LENGTH_SHORT).show();
-                    Intent intent = getIntent();
-                    finish();
-                    startActivity(intent);
+                    path = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM).getAbsolutePath();
+                    Toast.makeText(QRcodeGenerator.this, "Saved successfully in " + path, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -136,6 +138,15 @@ public class QRcodeGenerator extends AppCompatActivity {
                 }
             }
         });
+
+        btnReset.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // TODO Auto-generated method stub
+                Intent intent = getIntent();
+                finish();
+                startActivity(intent);
+            }
+        });
     }
 
     // Xin quyen trong android 6.0 tro len
@@ -155,6 +166,7 @@ public class QRcodeGenerator extends AppCompatActivity {
         }
     }
 
+    // Kiem tra dung luong bo nho external Storage
     public boolean isExternalStorageReadable() {
         String state = Environment.getExternalStorageState();
         if (Environment.MEDIA_MOUNTED.equals(state) ||

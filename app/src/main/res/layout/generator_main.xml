@@ -47,6 +47,13 @@
             android:layout_height="match_parent"
             android:text="Share"
             android:backgroundTint="@color/zxing_custom_viewfinder_laser"/>
+        <Button
+            android:id="@+id/btnReset"
+            android:layout_weight="1"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:text="Reset"
+            android:backgroundTint="@color/zxing_custom_possible_result_points"/>
     </LinearLayout>
 
 </RelativeLayout>

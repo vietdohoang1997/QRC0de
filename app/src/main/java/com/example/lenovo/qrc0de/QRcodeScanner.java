@@ -22,8 +22,35 @@ public class QRcodeScanner  extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scanner_main);
+        setTitle("QR Scanner");
         init();
     }
+
+
+    public void init() {
+        IntentIntegrator integrator = new IntentIntegrator(this);
+        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
+        integrator.setPrompt("Wait.......");
+        integrator.setCameraId(0);
+        // beep khi scan qr thành công
+        integrator.setBeepEnabled(true);
+        integrator.initiateScan();
+    }
+
+    public void onActivityResult(int requestCode, int resultcode, Intent intent) {
+        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultcode, intent);
+        if (result != null) {
+            String contents = result.getContents();
+            ketqua = (TextView) findViewById(R.id.txtKetqua);
+            ketqua.setText(contents);
+            // lấy hiệu ứng rung khi scan thành công.
+            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            // SET RUNG 400 MILLISECONDS
+            v.vibrate(400);
+        }
+    }
+
+    // Menu
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.menu_1, menu);
@@ -81,28 +108,5 @@ public class QRcodeScanner  extends AppCompatActivity {
     public void openQRcodeScanner(){
         Intent intent = new Intent(this, QRcodeScanner.class);
         startActivity(intent);
-    }
-
-    public void init() {
-        IntentIntegrator integrator = new IntentIntegrator(this);
-        integrator.setDesiredBarcodeFormats(IntentIntegrator.QR_CODE_TYPES);
-        integrator.setPrompt("Wait.......");
-        integrator.setCameraId(0);
-        // beep khi scan qr thành công
-        integrator.setBeepEnabled(true);
-        integrator.initiateScan();
-    }
-
-    public void onActivityResult(int requestCode, int resultcode, Intent intent) {
-        IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultcode, intent);
-        if (result != null) {
-            String contents = result.getContents();
-            ketqua = (TextView) findViewById(R.id.txtKetqua);
-            ketqua.setText(contents);
-            // lấy hiệu ứng rung khi scan thành công.
-            Vibrator v = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-            // SET RUNG 400 MILLISECONDS
-            v.vibrate(400);
-        }
     }
 }

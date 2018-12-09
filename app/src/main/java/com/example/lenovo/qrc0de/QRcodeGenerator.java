@@ -45,7 +45,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Random;
 
-public class QRcodeGenerator extends AppCompatActivity {
+public class QRcodeGenerator extends MainActivity{
     private EditText etInput;
     private Button btnCreate;
     private ImageView imageView;
@@ -197,148 +197,32 @@ public class QRcodeGenerator extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.menuFlash:
-                Toast.makeText(this, "Ban da chon Flash", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.menuGenerate:
-                Toast.makeText(this, "Ban da chon tao ma QR", Toast.LENGTH_SHORT).show();
+        switch (item.getItemId()){
+            case  R.id.menuGenerate:
+                Toast.makeText(this,"Ban da chon tao ma QR", Toast.LENGTH_SHORT).show();
                 openQRcodeGenerator();
                 break;
-            case R.id.menuScanner:
-                Toast.makeText(this, "Ban da chon quet ma QR", Toast.LENGTH_SHORT).show();
+            case  R.id.menuScanner:
+                Toast.makeText(this,"Ban da chon quet ma QR", Toast.LENGTH_SHORT).show();
                 openQRcodeScanner();
                 break;
-            case R.id.menuHistory:
-                Toast.makeText(this, "Ban da chon lich su", Toast.LENGTH_SHORT).show();
+            case  R.id.menuHistory:
+                Toast.makeText(this,"Ban da chon lich su", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menuSettings:
-                Toast.makeText(this, "Ban da chon cai dat", Toast.LENGTH_SHORT).show();
+            case  R.id.menuSettings:
+                Toast.makeText(this,"Ban da chon cai dat", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menuLike:
-                Toast.makeText(this, "Like Fanpage cua chung toi", Toast.LENGTH_SHORT).show();
+            case  R.id.menuShare:
+                Toast.makeText(this,"Like Fanpage cua chung toi", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com"));
                 startActivity(intent);
                 break;
-            case R.id.menuShare:
-                Toast.makeText(this, "Ban da chon Share", Toast.LENGTH_SHORT).show();
-                break;
-            case R.id.email:
-                Toast.makeText(this, "Ban da chon share qua email", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://gmail.com"));
-                startActivity(intent1);
-                break;
-            case R.id.facebook:
-                Toast.makeText(this, "Ban da chon share qua facebook", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://facebook.com"));
-                startActivity(intent2);
+            case  R.id.menuMoreApp:
+                Toast.makeText(this,"hihi", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);
     }
 
 }
-
-/*Button Share
-    public void OnClickShare(View view){
-        Bitmap bitmap=((BitmapDrawable)imageView.getDrawable()).getBitmap();
-        try {
-            File file = new File(this.getExternalCacheDir(),"QR_image.png");
-            FileOutputStream fOut = new FileOutputStream(file);
-            bitmap.compress(Bitmap.CompressFormat.PNG, 100, fOut);
-            fOut.flush();
-            fOut.close();
-            file.setReadable(true, false);
-            final Intent intent = new Intent(android.content.Intent.ACTION_SEND);
-            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-            intent.putExtra(Intent.EXTRA_STREAM, Uri.fromFile(file));
-            intent.setType("image/png");
-            startActivity(Intent.createChooser(intent, "Share image via"));
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-    private Bitmap getBitmapFromView(View view) {
-        Bitmap returnedBitmap = Bitmap.createBitmap(view.getWidth(), view.getHeight(),Bitmap.Config.ARGB_8888);
-        Canvas canvas = new Canvas(returnedBitmap);
-        Drawable bgDrawable =view.getBackground();
-        if (bgDrawable!=null) {
-            //has background drawable, then draw it on the canvas
-            bgDrawable.draw(canvas);
-        }   else{
-            //does not have background drawable, then draw white background on the canvas
-            canvas.drawColor(Color.WHITE);
-        }
-        view.draw(canvas);
-        return returnedBitmap;
-    }*/
-
-
-/*
-    @Override
-    public void onClick(View v) {
-        int id = v.getId();
-        switch (id){
-            case R.id.btnSave:
-                dialog = new AlertDialog.Builder(this).create();
-                dialog.setTitle("Save Image");
-                dialog.setMessage("You are sure to save your image ?");
-                dialog.setButton("Yes", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        startSave();
-                    }
-                });
-                dialog.setButton2("No", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                    }
-                });
-        }
-    }
-
-    public void startSave(){
-        FileOutputStream fileOutputStream = null;
-        File file = getDisc();
-        if(!file.exists() && !file.mkdir()){
-            Toast.makeText(this, "Can't create directory to save Image", Toast.LENGTH_SHORT).show();
-            return;
-        }
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyymmsshhmmss");
-        String date = simpleDateFormat.format(new Date());
-        Random generator = new Random();
-        int n = 10000;
-        n = generator.nextInt(n);
-        String name = "Image-"+ n +".jpg";
-        String file_name =  file.getAbsolutePath() + "/" + name;
-        File new_file = new File(file_name);
-        try{
-            FileOutputStream out = new FileOutputStream(new_file);
-            Bitmap image = BitmapFactory.decodeResource(getResources(), R.id.imageView);
-            image.compress(Bitmap.CompressFormat.JPEG, 100, fileOutputStream);
-            Toast.makeText(this, "Save image success", Toast.LENGTH_SHORT).show();
-            fileOutputStream.flush();
-            fileOutputStream.close();
-            out.flush();
-            out.close();
-        } catch (FileNotFoundException e) {
-            e.printStackTrace();
-        }catch (IOException e){
-            e.printStackTrace();
-        }
-        refreshGalerry(new_file);
-    }
-
-    public void  refreshGalerry(File file){
-        Intent intent = new Intent(Intent.ACTION_MEDIA_SCANNER_SCAN_FILE);
-        intent.setData(Uri.fromFile(file));
-        sendBroadcast(intent);
-    }
-
-    public File getDisc(){
-        File file = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DCIM);
-        return new File(file, "QR Image");
-    }*/
 

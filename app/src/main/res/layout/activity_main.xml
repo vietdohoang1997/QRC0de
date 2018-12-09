@@ -1,26 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.v4.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
+    tools:context=".MainActivity"
+    android:background="@drawable/vintage_christmas_background"
+    android:id="@+id/drawer_layout">
 
-    <pl.droidsonroids.gif.GifTextView
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <pl.droidsonroids.gif.GifTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/image1"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginTop="0dp"
+            android:layout_marginEnd="0dp"
+            android:background="@drawable/barcode_types" />
+
+        <pl.droidsonroids.gif.GifTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/papai_noel" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.NavigationView
+        android:id="@+id/navigation_view"
+        app:headerLayout="@layout/header"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/image1"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginTop="0dp"
-        android:layout_marginEnd="0dp"
-        android:background="@drawable/barcode_types" />
+        android:layout_height="match_parent"
+        app:menu="@menu/menu_1"
+        android:background="@drawable/menu_background"
+        app:itemTextColor="@color/white"
+        app:itemIconTint="@color/darkgray"
+        android:layout_gravity="start">
 
-    <pl.droidsonroids.gif.GifTextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_alignParentBottom="true"
-        android:background="@drawable/papai_noel" />
+    </android.support.design.widget.NavigationView>
 
-</RelativeLayout>
+
+</android.support.v4.widget.DrawerLayout>

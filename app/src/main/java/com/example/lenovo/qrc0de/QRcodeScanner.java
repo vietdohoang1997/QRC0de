@@ -18,14 +18,15 @@ public class QRcodeScanner  extends AppCompatActivity {
     TextView ketqua;
     Context context;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.scanner_main);
         setTitle("QR Scanner");
         init();
-    }
 
+    }
 
     public void init() {
         IntentIntegrator integrator = new IntentIntegrator(this);
@@ -61,9 +62,6 @@ public class QRcodeScanner  extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()){
-            case  R.id.menuFlash:
-                Toast.makeText(this, "Ban da chon Flash", Toast.LENGTH_SHORT).show();
-                break;
             case  R.id.menuGenerate:
                 Toast.makeText(this,"Ban da chon tao ma QR", Toast.LENGTH_SHORT).show();
                 openQRcodeGenerator();
@@ -78,23 +76,13 @@ public class QRcodeScanner  extends AppCompatActivity {
             case  R.id.menuSettings:
                 Toast.makeText(this,"Ban da chon cai dat", Toast.LENGTH_SHORT).show();
                 break;
-            case  R.id.menuLike:
+            case  R.id.menuShare:
                 Toast.makeText(this,"Like Fanpage cua chung toi", Toast.LENGTH_SHORT).show();
                 Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://google.com"));
                 startActivity(intent);
                 break;
-            case  R.id.menuShare:
-                Toast.makeText(this,"Ban da chon Share", Toast.LENGTH_SHORT).show();
-                break;
-            case  R.id.email:
-                Toast.makeText(this,"Ban da chon share qua email", Toast.LENGTH_SHORT).show();
-                Intent intent1 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://gmail.com"));
-                startActivity(intent1);
-                break;
-            case  R.id.facebook:
-                Toast.makeText(this,"Ban da chon share qua facebook", Toast.LENGTH_SHORT).show();
-                Intent intent2 = new Intent(Intent.ACTION_VIEW, Uri.parse("http://facebook.com"));
-                startActivity(intent2);
+            case  R.id.menuMoreApp:
+                Toast.makeText(this,"hihi", Toast.LENGTH_SHORT).show();
                 break;
         }
         return super.onOptionsItemSelected(item);

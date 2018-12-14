@@ -46,7 +46,11 @@ import java.util.List;
 import java.util.Random;
 
 public class QRcodeGenerator extends MainActivity{
-    private EditText etInput;
+    private EditText etTen;
+    private EditText etSoLuong;
+    private EditText etTinhTrang;
+    private EditText etNguoiGiu;
+
     private Button btnCreate;
     private ImageView imageView;
     private Button btnSave;
@@ -64,7 +68,11 @@ public class QRcodeGenerator extends MainActivity{
         setContentView(R.layout.generator_main);
         setTitle("QR Generator");
 
-        etInput = findViewById(R.id.etInput);
+        etTen = findViewById(R.id.etTen);
+        etSoLuong = findViewById(R.id.etSoLuong);
+        etTinhTrang = findViewById(R.id.etTinhTrang);
+        etNguoiGiu = findViewById(R.id.etNguoiGiu);
+
         btnCreate = findViewById(R.id.btnCreate);
         imageView = findViewById(R.id.imageView);
         btnSave = findViewById(R.id.btnSave);
@@ -77,7 +85,12 @@ public class QRcodeGenerator extends MainActivity{
         btnCreate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String text = etInput.getText().toString().trim();
+                String Ten = etTen.getText().toString().trim();
+                String TinhTrang = etTinhTrang.getText().toString().trim();
+                String NguoiGiu = etNguoiGiu.getText().toString().trim();
+                String SoLuong = etSoLuong.getText().toString().trim();
+                String text = "Thiet Bi    : " + Ten+ "\n"+ "So Luong  :  "+ SoLuong + "\n" + "Nguoi Giu  :  "+ NguoiGiu+ "\n"+ "Tinh Trang :" + TinhTrang;
+                /* String text = etInput.getText().toString().trim();*/
                 if (text != null) {
                     MultiFormatWriter multiFormatWriter = new MultiFormatWriter();
                     try {

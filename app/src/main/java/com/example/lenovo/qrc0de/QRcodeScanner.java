@@ -8,6 +8,8 @@ import android.os.Vibrator;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -17,6 +19,7 @@ import com.google.zxing.integration.android.IntentResult;
 public class QRcodeScanner  extends AppCompatActivity {
     TextView ketqua;
     Context context;
+    private Button btnScan;
 
 
     @Override
@@ -25,6 +28,13 @@ public class QRcodeScanner  extends AppCompatActivity {
         setContentView(R.layout.scanner_main);
         setTitle("QR Scanner");
         init();
+        btnScan = findViewById(R.id.btnScan);
+        
+        btnScan.setOnClickListener(new View.OnClickListener(){
+            public void onClick(View v)
+            {
+                openQRcodeScanner();}
+        });
 
     }
 
